@@ -1,4 +1,4 @@
-import React from 'react'
+"use client"
 import Image from 'next/image'
 import logo from "../favicon.ico"
 
@@ -9,7 +9,7 @@ type props={
 const Navbar = ({setShow}:props) => {
   return (
     <div>
-        <div className='bg-sky-600 flex gap-20 items-center px-10  '>
+        <div className='bg-sky-600 flex gap-20 items-center px-10  py-2 '>
         <Image
           src={logo}
           width={70}
