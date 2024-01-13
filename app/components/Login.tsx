@@ -1,8 +1,35 @@
-import React from 'react'
+"use Client"
+
+import { useState } from "react"
+import { GetUser } from "../lib/actions"
 type props={
-    setShow:Dispatch<SetStateAction<boolean>>
+    setShow?:Dispatch<SetStateAction<boolean>>
 }
 export const Login = ({setShow}:props) => {
+   const [username,setUsername]=useState("")
+   const [password,setPassword]=useState("")
+   const [error,setError]=useState(false)
+   const [disabled,setDisabled]=useState(false)
+const handleSubmit=async()=>{ 
+  setDisabled(true)
+   try {
+      const res=await GetUser(username,password)
+      const data=JSON.stringify({user:true}) 
+      if(res===true){
+        localStorage.setItem("user",data)
+        window.location.href="/"
+      }else{
+       setError(true)
+      }
+      
+   } catch (error) {
+      console.log(error);
+      
+   }
+    
+}
+
+
   return (
     <div className='mx-32 flex flex-col justify-center absolute top-20 left-32 z-50 bg-slate-400 p-20 '>
         <div>
@@ -16,14 +43,21 @@ export const Login = ({setShow}:props) => {
          <form >
            <div className='w-56 flex flex-col gap-3 '>
              <label className='capitalize'>user name</label>
-             <input type="text" className='border-2 border-black rounded-lg' />
+             <input type="text" className='border-2 border-black rounded-lg'
+              onChange={(e)=>setUsername(e.target.value)}
+             />
            </div>
            <div className='w-56 flex flex-col gap-3 '>
              <label className='capitalize'>password</label>
-             <input type="text" className='border-2 border-black rounded-lg' />
+             <input type="text" className='border-2 border-black rounded-lg'
+                onChange={(e)=>setPassword(e.target.value)}
+             />
            </div>
+           {error&&(<p className="text-pink-500">incorrect password</p>)}
            <div className='flex gap-32 mx-10 my-5 cursor-pointer'>
-            <button type="button" disabled={false} className='px-5 py-2 bg-sky-600 rounded-lg hover:scale-110' >LogIn</button>
+            <button type="button" disabled={username==""||password==""} 
+               onClick={()=>handleSubmit()}
+            className='px-5 py-2 bg-sky-600 rounded-lg hover:scale-110' >LogIn</button>
             <button type='button' className='px-3 py-2 bg-sky-600  rounded-lg hover:scale-110' >forget password</button>
            </div>
          </form>

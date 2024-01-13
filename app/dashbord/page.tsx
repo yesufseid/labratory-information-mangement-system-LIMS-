@@ -1,4 +1,4 @@
-"use client"
+'use client'
 import Navbar from "../components/Navbar"
 import { GiBoxUnpacking } from "react-icons/gi";
 import { PiHandCoinsDuotone } from "react-icons/pi";
@@ -7,7 +7,8 @@ import { MdOutlineHandshake } from "react-icons/md";
 import { BiTransfer } from "react-icons/bi";
 import { useState } from 'react'
 import { Login } from "../components/Login";
-const Dashbord = () => {
+
+const Dashbord = async() => {
   const [show ,setShow ]=useState(false)
   return (
  <div className="bg-slate-400">
