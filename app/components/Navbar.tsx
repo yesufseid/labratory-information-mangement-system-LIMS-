@@ -1,6 +1,6 @@
 "use client"
 import Image from 'next/image'
-import logo from "../favicon.ico"
+import logo from "../asset/1.png"
 import { useEffect,useState} from 'react'
 import Link from 'next/link'
 
@@ -18,7 +18,7 @@ const Navbar = ({setShow}:props) => {
   },[])
 
 const LogOut=()=>{
-  localStorage.clear()
+  localStorage.removeItem("user")
   return window.location.href="/"
 }
 
@@ -26,12 +26,18 @@ const LogOut=()=>{
   return (
     <div>
         <div className='bg-sky-600 flex gap-20 items-center px-10  py-2 '>
+          <div className='flex gap-3 items-center text-white'>
         <Image
           src={logo}
-          width={70}
-            height={70}
+          width={100}
+         height={100}
           alt="Logo"
     />
+    <div>
+    <h1 className='capitalize text-2xl font-bold'>Wolkite University</h1>
+    <p className='capitalize '>we strive for wisdom</p>
+    </div>
+    </div>
     <h1 className='capitalize text-2xl font-bold '>labratory information mangement system(LIMS)</h1>
     {user&&(<h1 className='capitalize text-2xl font-bold ml-20 text-pink-600 '>wellcome admin</h1>)}
         </div>
