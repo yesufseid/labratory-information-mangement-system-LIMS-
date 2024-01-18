@@ -22,15 +22,26 @@ const GetUser=async(username:string,password:string)=>{
 const GetItems=async()=>{
        try {
            ConnectToDb()
-           const item =await Item.findOne( ) 
+           const item =await Item.find( ) 
         if(item){
-            const data=JSON.stringify(item)
-            localStorage.setItem("data",data)
+            console.log(item);
            return item
         }
        } catch (error) {
           console.log(error);   
        }
    }
+ const CreateItems=async(data:{name,type,description,quantity,expriredate})=>{
+    try {
+        ConnectToDb()
+        const item =await Item.create(data) 
+     if(item){
+        console.log(item);
+        return item
+     }
+    } catch (error) {
+       console.log(error);   
+    }
+}
 
-export {GetUser,GetItems}
+export {GetUser,GetItems,CreateItems}

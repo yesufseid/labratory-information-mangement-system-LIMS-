@@ -25,7 +25,7 @@ const LogOut=()=>{
 
   return (
     <div>
-        <div className='bg-sky-600 flex gap-20 items-center px-10  py-2 '>
+        <div className='bg-sky-600 flex gap-10 items-center px-10  py-2 '>
           <div className='flex gap-3 items-center text-white'>
         <Image
           src={logo}

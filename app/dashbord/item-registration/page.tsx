@@ -1,19 +1,32 @@
 "use client"
 import Navbar from '@/app/components/Navbar'
 import { useState } from "react"
+import {CreateItems} from "../../lib/actions"
 
 
-const Registraton=async()=>{
-  const [username,setUsername]=useState("")
-  const [password,setPassword]=useState("")
+export default function Registraton(){
+  const [name,setName]=useState("")
+  const [description,setDescription]=useState("")
+  const [type,setType]=useState("")
+  const [quantity,setQuantity]=useState("")
+  const [expriredate,setExpriredate]=useState("")
   const [error,setError]=useState(false)
-  const [disabled,setDisabled]=useState(false)
+  const [loading,setLoading]=useState(false)
 
   const handleSubmit=async()=>{ 
-    setDisabled(true)
+    setLoading(true)
+    const data={
+      name:name,
+      description:description,
+      type:type,
+      quantity:quantity,
+      expriredate:expriredate
+    }
      try {
-       
-     } catch (error) {
+    const item=await CreateItems(data)
+    setLoading(false)
+    console.log(item);
+   } catch (error) {
         console.log(error);
         
      }
@@ -31,38 +44,38 @@ const Registraton=async()=>{
            <div className='w-56 flex flex-col gap-3 '>
              <label className='capitalize'>name</label>
              <input type="text" className='border-2 border-black rounded-lg'
-              onChange={(e)=>setUsername(e.target.value)}
+              onChange={(e)=>setName(e.target.value)}
              />
            </div>
            <div className='w-56 flex flex-col gap-3 '>
              <label className='capitalize'>description</label>
              <textarea  className='border-2 border-black rounded-lg'
-                onChange={(e)=>setPassword(e.target.value)}
+                onChange={(e)=>setDescription(e.target.value)}
              />
            </div>
            <div className='w-56 flex flex-col gap-3 '>
              <label className='capitalize'>Expire date</label>
              <input type="text" className='border-2 border-black rounded-lg'
-                onChange={(e)=>setPassword(e.target.value)}
+                onChange={(e)=>setExpriredate(e.target.value)}
              />
            </div>
            <div className='w-56 flex flex-col gap-3 '>
              <label className='capitalize'>type</label>
              <input type="text" className='border-2 border-black rounded-lg'
-                onChange={(e)=>setPassword(e.target.value)}
+                onChange={(e)=>setType(e.target.value)}
              />
            </div>
            <div className='w-56 flex flex-col gap-3 '>
              <label className='capitalize'>quantity</label>
              <input type="text" className='border-2 border-black rounded-lg'
-                onChange={(e)=>setPassword(e.target.value)}
+                onChange={(e)=>setQuantity(e.target.value)}
              />
            </div>
            {error&&(<p className="text-pink-500">try again</p>)}
            <div className='flex gap-32 mx-10 my-5 cursor-pointer'>
-            <button type="button" disabled={username==""||password==""} 
+            <button type="button" 
                onClick={()=>handleSubmit()}
-            className='px-5 py-2 bg-sky-600 rounded-lg hover:scale-110' >save</button>
+            className='px-5 py-2 bg-sky-600 rounded-lg hover:scale-110' >{loading?(<p>Loading...</p>):(<p>save</p>)}</button>
            
            </div>
          </form>
@@ -82,4 +95,3 @@ const Registraton=async()=>{
   )
 }
 
-export default Registraton

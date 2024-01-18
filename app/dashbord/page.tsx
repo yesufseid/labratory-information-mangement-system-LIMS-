@@ -12,9 +12,17 @@ import { GetItems } from "../lib/actions";
 
 const Dashbord = () => {
  
-// useMemo(()=>{
-//     return  GetItems()
-//  },[])
+useMemo(async()=>{
+  try {
+    const items=await GetItems()
+    const data=JSON.stringify(items)
+    localStorage.setItem("data",data)
+    console.log(items);
+  } catch (error) {
+    console.log(error);
+    
+  }  
+ },[])
 
 
 
@@ -35,8 +43,11 @@ const Dashbord = () => {
         
     
         <div className="border-2 border-black flex flex-col justify-center">
+        <Link href={"/dashbord/recieved-chemical-or-equipment"}
+        >
           <PiHandCoinsDuotone className="w-32 h-32 text-purple-600  mx-auto hover:scale-110 cursor-pointer duration-500" />
           <h1 className='capitalize text-xl font-bold pt-5 text-center text-slate-500'>recived chemical or equipment</h1> 
+         </Link>
         </div>
         <div className="border-2 border-black flex flex-col justify-center">
         <Link href={"/dashbord/show-expired-stock"}
@@ -46,12 +57,16 @@ const Dashbord = () => {
        </Link>
         </div>
         <div className="border-2 border-black flex flex-col justify-center">
+        <Link href={"/dashbord/borrow-item"}>
           <MdOutlineHandshake className="w-32 h-32 text-slate-950  mx-auto hover:scale-110 cursor-pointer duration-500" />
           <h1 className='capitalize text-2xl font-bold pt-5 text-center text-slate-500'>borrow item</h1> 
+          </Link>
         </div>
         <div className="border-2 border-black flex flex-col justify-center">
+        <Link href={"/dashbord/transfer-item"}>
           < BiTransfer className="w-32 h-32 text-sky-950  mx-auto hover:scale-110 cursor-pointer duration-500" />
           <h1 className='capitalize text-2xl font-bold pt-5 text-center text-slate-500'>transfer item</h1> 
+          </Link>
         </div>
     </div>
     </div>
