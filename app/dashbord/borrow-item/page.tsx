@@ -1,7 +1,7 @@
 "use client"
 import Navbar from '@/app/components/Navbar'
 import { useState } from "react"
-import {useMemo} from "react"
+import {useEffect} from "react"
 import { CreateBorrowedItem } from '@/app/lib/actions'
 
 
@@ -13,11 +13,12 @@ export default function page(){
   const [from,setFrom]=useState("")
   const [error,setError]=useState(false)
   const [loading,setLoading]=useState(false)
-  const data=useMemo(()=>{
+  const [data,setData]=useState([])
+  useEffect(()=>{
     const items = localStorage.getItem("Bdata")
     const data=JSON.parse(items)
     console.log(data);
-    return data
+    return setData(data)
    },[])
 
   const handleSubmit=async()=>{ 

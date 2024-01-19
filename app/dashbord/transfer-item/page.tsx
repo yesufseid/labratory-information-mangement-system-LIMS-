@@ -1,7 +1,6 @@
 "use client"
 import Navbar from '@/app/components/Navbar'
-import { useState } from "react"
-import {useMemo} from "react"
+import { useState,useEffect } from "react"
 import { CreateTransferItem } from '@/app/lib/actions'
 
 
@@ -13,11 +12,12 @@ export default function page(){
   const [to,setTo]=useState("")
   const [error,setError]=useState(false)
   const [loading,setLoading]=useState(false)
-  const data=useMemo(()=>{
+  const [data,setData]=useState([])
+  useEffect(()=>{
     const items = localStorage.getItem("Tdata")
     const data=JSON.parse(items)
     console.log(data);
-    return data
+    return setData(data)
    },[])
 
   const handleSubmit=async()=>{ 

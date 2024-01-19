@@ -1,16 +1,17 @@
 "use client"
 
 import Navbar from "@/app/components/Navbar"
-import {useMemo} from "react"
+import {useEffect,useState} from "react"
 
 
 
 export default function page() {
-  const data=useMemo(()=>{
+  const [data,setData]=useState([])
+  useEffect(()=>{
    const items = localStorage.getItem("data")
    const data=JSON.parse(items)
    console.log(data);
-   return data
+   return setData(data)
   },[])
 
   return (
