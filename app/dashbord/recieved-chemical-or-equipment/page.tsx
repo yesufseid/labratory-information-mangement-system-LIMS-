@@ -26,15 +26,22 @@ export default function page() {
                <div className="border-2 border-black capitalize text-2xl font-bold pt-3 text-center text-pink-900">quantity</div>
                <div className="border-2 border-black capitalize text-2xl font-bold pt-3 text-center text-pink-900">expriredate</div>
            </div>
-          {data?.map((p)=>(
+          {data?.map((p)=>{
+            const newdate = new Date(p.createdAt); 
+            const date=(newdate.getFullYear()*31536000000)+(newdate.getMonth()*86400000*30)+(newdate.getDay()*86400000)
+            const e= p.expiredate/86400000
+              const d=(date/86400000)+((p.date-Date.now())/86400000)+((date-e)/86400000)*0.001
+              let Word=e-d>0?"days left":"days pass"
+              let sss=Math.floor(e-d) 
+       return   (
            <div className="grid grid-cols-5 ">
                <div className="border-2 border-black text-center">{p.name}</div>
                <div className="border-2 border-black text-center">{p.type}</div>
                <div className="border-2 border-black text-center ">{p.description}</div>
                <div className="border-2 border-black text-center">{p.quantity}</div>
-               <div className="border-2 border-black text-center">{p.expriredate}</div>
+               <div className="border-2 border-black text-center">{sss}{" "}{Word}</div>
            </div>
-          ))}
+          )})}
     </div>
     </div>
     </div>

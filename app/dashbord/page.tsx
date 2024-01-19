@@ -8,19 +8,36 @@ import { BiTransfer } from "react-icons/bi";
 import { useState,useMemo } from 'react'
 import { Login } from "../components/Login";
 import Link from 'next/link'
-import { GetItems } from "../lib/actions";
+import { GetItems,GetBorrowedItems,GetTransferedItems } from "../lib/actions";
+
 
 const Dashbord = () => {
- 
+ const [expire,setExpire]=useState<number>(0)
+
+
+
 useMemo(async()=>{
   try {
     const items=await GetItems()
+    const Bitems=await GetBorrowedItems()
+    const Titems=await GetTransferedItems()
     const data=JSON.stringify(items)
+    const Bdata=JSON.stringify(Bitems)
+    const Tdata=JSON.stringify(Titems)
     localStorage.setItem("data",data)
-    console.log(items);
+    localStorage.setItem("Bdata",Bdata)
+    localStorage.setItem("Tdata",Tdata)
+    const fliters=items.filter((i)=> {
+      const newdate = new Date(i.createdAt); 
+      const date=(newdate.getFullYear()*31536000000)+(newdate.getMonth()*86400000*30)+(newdate.getDay()*86400000)
+      const e= i.expiredate/86400000
+        const d=(date/86400000)+((date-e)/86400000)*0.001
+        const items=d >= e
+          return items })
+    setExpire(fliters.length)
+    
   } catch (error) {
     console.log(error);
-    
   }  
  },[])
 
@@ -53,7 +70,7 @@ useMemo(async()=>{
         <Link href={"/dashbord/show-expired-stock"}
         >
           <TbClockX className="w-32 h-32 text-pink-700  mx-auto hover:scale-110 cursor-pointer duration-500" />
-        <h1 className='capitalize text-2xl font-bold pt-5 text-center text-slate-500'><span className="text-pink-500">11 items </span>{" "}will expire soon</h1> 
+        <h1 className='capitalize text-2xl font-bold pt-5 text-center text-slate-500'><span className="text-pink-500">{expire} {""}items </span>{" "}will expire soon</h1> 
        </Link>
         </div>
         <div className="border-2 border-black flex flex-col justify-center">

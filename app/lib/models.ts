@@ -11,7 +11,8 @@ const item = new mongoose.Schema({
   type: { type: String, required: true },
   description: { type: String, required: true },
   quantity: { type: String, required: true },
-  expriredate: { type: String, required: true },
+  expiredate: { type:Number, required: true },
+  date:{type:Number,require:true}
 }, { timestamps: true });
 
 const Item = mongoose.models.Item || mongoose.model('Item', item);
@@ -29,7 +30,7 @@ const transferitem = new mongoose.Schema({
   type: { type: String, required: true },
   description: { type: String, required: true },
   quantity: { type: String, required: true },
-  from: { type: String, required: true },
+  to: { type: String, required: true },
 }, { timestamps: true });
 
 const TransferItem= mongoose.models.TransferItem || mongoose.model('TransferItem',transferitem);
