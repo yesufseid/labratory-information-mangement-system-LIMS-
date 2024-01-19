@@ -4,7 +4,7 @@ import { useState } from "react"
 import { GetUser } from "../lib/actions"
 import Image from "next/image"
 type props={
-    setShow?:Dispatch<SetStateAction<boolean>>
+    setShow?:React.Dispatch<React.SetStateAction<boolean>>
 }
 export const Login = ({setShow}:props) => {
    const [username,setUsername]=useState("")

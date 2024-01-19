@@ -6,7 +6,7 @@ import Link from 'next/link'
 
 
 type props={
-    setShow?:Dispatch<SetStateAction<boolean>>
+    setShow?:React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const Navbar = ({setShow}:props) => {
