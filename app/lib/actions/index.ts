@@ -24,8 +24,8 @@ const GetItems=async()=>{
            ConnectToDb()
            const item =await Item.find( ) 
         if(item){
-            console.log(item);
-           return item
+            const data=JSON.stringify(item)
+           return data
         }
        } catch (error) {
           console.log(error);   
@@ -37,7 +37,7 @@ const GetItems=async()=>{
         const item =await Item.create(data) 
      if(item){
         console.log(item);
-        return item
+        return true
      }
     } catch (error) {
        console.log(error);   
@@ -50,7 +50,7 @@ const CreateBorrowedItem=async(data)=>{
        const item =await BorrowItem.create(data) 
     if(item){
        console.log(item);
-       return item
+       return true
     }
    } catch (error) {
       console.log(error);   
@@ -63,7 +63,7 @@ const CreateTransferItem=async(data)=>{
        const item =await TransferItem.create(data) 
     if(item){
        console.log(item);
-       return item
+       return true
     }
    } catch (error) {
       console.log(error);   
@@ -75,8 +75,8 @@ const GetBorrowedItems=async()=>{
        ConnectToDb()
        const item =await BorrowItem.find( ) 
     if(item){
-        console.log(item);
-       return item
+      const data=JSON.stringify(item)
+      return data
     }
    } catch (error) {
       console.log(error);   
@@ -87,8 +87,8 @@ const GetTransferedItems=async()=>{
        ConnectToDb()
        const item =await TransferItem.find( ) 
     if(item){
-        console.log(item);
-       return item
+      const data=JSON.stringify(item)
+      return data
     }
    } catch (error) {
       console.log(error);   

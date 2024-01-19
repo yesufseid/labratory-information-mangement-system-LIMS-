@@ -5,7 +5,7 @@ import { PiHandCoinsDuotone } from "react-icons/pi";
 import { TbClockX } from "react-icons/tb";
 import { MdOutlineHandshake } from "react-icons/md";
 import { BiTransfer } from "react-icons/bi";
-import { useState,useMemo } from 'react'
+import { useState,useMemo,useEffect } from 'react'
 import { Login } from "../components/Login";
 import Link from 'next/link'
 import { GetItems,GetBorrowedItems,GetTransferedItems } from "../lib/actions";
@@ -16,18 +16,19 @@ const Dashbord = () => {
 
 
 
-useMemo(async()=>{
+useEffect(()=>{
+  const handleFech=async()=>{
   try {
     const items=await GetItems()
     const Bitems=await GetBorrowedItems()
     const Titems=await GetTransferedItems()
-    const data=JSON.stringify(items)
-    const Bdata=JSON.stringify(Bitems)
-    const Tdata=JSON.stringify(Titems)
-    localStorage.setItem("data",data)
-    localStorage.setItem("Bdata",Bdata)
-    localStorage.setItem("Tdata",Tdata)
-    const fliters=items.filter((i)=> {
+    // const data=JSON.stringify(items)
+    // const Bdata=JSON.stringify(Bitems)
+    // const Tdata=JSON.stringify(Titems)
+    localStorage.setItem("data",items)
+    localStorage.setItem("Bdata",Bitems)
+    localStorage.setItem("Tdata",Titems)
+    const fliters= JSON.parse(items).filter((i)=> {
       const newdate = new Date(i.createdAt); 
       const date=(newdate.getFullYear()*31536000000)+(newdate.getMonth()*86400000*30)+(newdate.getDay()*86400000)
       const e= i.expiredate/86400000
@@ -38,7 +39,9 @@ useMemo(async()=>{
     
   } catch (error) {
     console.log(error);
-  }  
+  } 
+} 
+handleFech()
  },[])
 
 
