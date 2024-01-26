@@ -4,6 +4,7 @@ import logo from "../app/asset/2.jpeg"
 import { Login } from './components/Login'
 import { useState } from 'react'
 import Navbar from './components/Navbar'
+import Footer from './components/Footer'
 
 
 export default function Home() {
@@ -11,7 +12,7 @@ export default function Home() {
   return (
    <div className="w-screen ">
       <Navbar setShow={setShow} />
-      <div className="flex gap-10 mx-32 pt-10">
+      <div className="flex gap-10 mx-32 pt-5">
         <div className='w-56 py-1'>
       <Image
           src={logo}
@@ -34,6 +35,7 @@ export default function Home() {
     </div>
       </div>
       {show&&<Login setShow={setShow} />}
+      <Footer />
    </div>
   )
 }

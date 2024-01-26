@@ -1,5 +1,12 @@
 "use client"
-
+import * as React from 'react';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
 import Navbar from "@/app/components/Navbar"
 import {useEffect,useState} from "react"
 
@@ -31,29 +38,44 @@ export default function page() {
       <h1 className='capitalize text-2xl font-bold pt-3 text-center text-pink-900'>Expired items</h1>
     <div>
     <div className='mx-10 gap-3 overflow-y-auto  border-2 border-sky-600 p-5'>
-    <div className="grid grid-cols-5 py-2">
-               <div className="border-2 border-black capitalize text-2xl font-bold pt-3 text-center text-pink-900">name</div>
-               <div className="border-2 border-black capitalize text-2xl font-bold pt-3 text-center text-pink-900">type</div>
-               <div className="border-2 border-black capitalize text-2xl font-bold pt-3 text-center text-pink-900">description</div>
-               <div className="border-2 border-black capitalize text-2xl font-bold pt-3 text-center text-pink-900">quantity</div>
-               <div className="border-2 border-black capitalize text-2xl font-bold pt-3 text-center text-pink-900">expiredate</div>
-           </div>
-          {data?.map((p)=>{
-           const newdate = new Date(p.createdAt); 
-           const date=(newdate.getFullYear()*31536000000)+(newdate.getMonth()*86400000*30)+(newdate.getDay()*86400000)
-           const e= p.expiredate/86400000
-             const d=(date/86400000)+((p.date-Date.now())/86400000)+((date-e)/86400000)*0.001
-             let Word=e-d>0?"days left":"days pass"
-             let sss=Math.floor(e-d)  
-      return (
-           <div className="grid grid-cols-5 ">
-               <div className="border-2 border-black text-center">{p.name}</div>
-               <div className="border-2 border-black text-center">{p.type}</div>
-               <div className="border-2 border-black text-center ">{p.description}</div>
-               <div className="border-2 border-black text-center">{p.quantity}</div>
-               <div className="border-2 border-black text-center">{sss}{" "} {Word}</div>
-           </div>
-          )})}
+<TableContainer component={Paper}>
+      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell  className="capitalize text-2xl font-bold  text-center text-pink-900">name</TableCell>
+            <TableCell  className="capitalize text-2xl font-bold  text-center text-pink-900" align="right">type</TableCell>
+            <TableCell  className="capitalize text-2xl font-bold  text-center text-pink-900" align="right">description</TableCell>
+            <TableCell  className="capitalize text-2xl font-bold  text-center text-pink-900" align="right">quantity</TableCell>
+            <TableCell  className="capitalize text-2xl font-bold  text-center text-pink-900" align="right">expriredate</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {data.map((row) =>{
+            const newdate = new Date(row.createdAt); 
+            const date=(newdate.getFullYear()*31536000000)+(newdate.getMonth()*86400000*30)+(newdate.getDay()*86400000)
+            const e= row.expiredate/86400000
+              const d=(date/86400000)+((row.date-Date.now())/86400000)+((date-e)/86400000)*0.001
+              let Word=e-d>0?"days left":"days pass"
+              let sss=Math.floor(e-d) 
+          return(
+            <TableRow
+              key={row.name}
+              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+            >
+              <TableCell className='text-center' component="th" scope="row">
+                {row.name}
+              </TableCell>
+              <TableCell className='text-center' align="right">{row.type}</TableCell>
+              <TableCell className='text-center' align="right"><p className='w-56 break-words h-fit '>{row.description}</p></TableCell>
+              <TableCell className='text-center' align="right">{row.quantity}</TableCell>
+              <TableCell className='text-center' align="right">{sss}{" "}{Word}</TableCell>
+            </TableRow>
+)})}
+        </TableBody>
+      </Table>
+    </TableContainer>
+
+    
     </div>
     </div>
     </div>
