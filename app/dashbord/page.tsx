@@ -29,6 +29,7 @@ useEffect(()=>{
     localStorage.setItem("Bdata",Bitems)
     localStorage.setItem("Tdata",Titems)
     const fliters= JSON.parse(items).filter((i)=> {
+      if(i.type==="equipment") return null
       const newdate = new Date(i.createdAt); 
       const date=(newdate.getFullYear()*31536000000)+(newdate.getMonth()*86400000*30)+(newdate.getDay()*86400000)
       const e= i.expiredate/86400000

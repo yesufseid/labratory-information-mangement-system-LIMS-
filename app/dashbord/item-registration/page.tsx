@@ -9,7 +9,7 @@ export default function Registraton(){
   const [description,setDescription]=useState("")
   const [type,setType]=useState("")
   const [quantity,setQuantity]=useState("")
-  const [expriredate,setExpriredate]=useState("")
+  const [expriredate,setExpriredate]=useState("56-678-67")
   const [error,setError]=useState(false)
   const [loading,setLoading]=useState(false)
 

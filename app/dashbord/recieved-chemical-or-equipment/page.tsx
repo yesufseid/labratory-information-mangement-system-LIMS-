@@ -41,7 +41,7 @@ export default function page() {
         <TableBody>
           {data.map((row) =>{
             let col=false
-            if(row.type==="equipment") return col=true
+            if(row.type==="equipment") col=true
             const newdate = new Date(row.createdAt); 
             const date=(newdate.getFullYear()*31536000000)+(newdate.getMonth()*86400000*30)+(newdate.getDay()*86400000)
             const e= row.expiredate/86400000
