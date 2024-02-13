@@ -79,7 +79,7 @@ export default function Registraton(){
            <div className='flex gap-32 mx-10 my-5 cursor-pointer justify-center'>
             <button type="button" 
                onClick={()=>handleSubmit()}
-               disabled={name===""||quantity===""||description===""||type===""||expriredate===""}
+               disabled={name===""||quantity===""||description===""||type===""}
             className='px-5 py-2 bg-sky-600 rounded-lg hover:scale-110' >{loading?(<p>Loading...</p>):(<p>save</p>)}</button>
            
            </div>

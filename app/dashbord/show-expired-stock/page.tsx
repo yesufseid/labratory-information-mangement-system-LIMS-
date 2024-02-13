@@ -18,16 +18,18 @@ export default function page() {
    const items = localStorage.getItem("data")
    const data=JSON.parse(items)
    const fliters=data.filter((i)=> {
+    if(i.type==="equipment") return null
     const newdate = new Date(i.createdAt); 
     const date=(newdate.getFullYear()*31536000000)+(newdate.getMonth()*86400000*30)+(newdate.getDay()*86400000)
     const e= i.expiredate/86400000
       const d=(date/86400000)+((i.date-Date.now())/86400000)+((date-e)/86400000)*0.001
       const item=d >= e
+     
       // const ob={
       //   newExpiredate:e-d
       // }
-        return item })
-       
+        return item  })
+      
         
    return  setData(fliters)
   },[])

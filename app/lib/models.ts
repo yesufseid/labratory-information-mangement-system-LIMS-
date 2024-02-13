@@ -11,7 +11,7 @@ const item = new mongoose.Schema({
   type: { type: String, required: true },
   description: { type: String, required: true },
   quantity: { type: String, required: true },
-  expiredate: { type:Number, required: true },
+  expiredate: { type:Number, required: false },
   date:{type:Number,require:true}
 }, { timestamps: true });
 
@@ -21,7 +21,8 @@ const borrowitem = new mongoose.Schema({
   type: { type: String, required: true },
   description: { type: String, required: true },
   quantity: { type: String, required: true },
-  from: { type: String, required: true },
+  to: { type: String, required: true },
+  restortion_day:{type:String,required:true}
 }, { timestamps: true });
 
 const BorrowItem = mongoose.models.BorrowItem || mongoose.model('BorrowItem',borrowitem);

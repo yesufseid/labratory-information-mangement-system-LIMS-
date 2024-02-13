@@ -40,6 +40,8 @@ export default function page() {
         </TableHead>
         <TableBody>
           {data.map((row) =>{
+            let col=false
+            if(row.type==="equipment") return col=true
             const newdate = new Date(row.createdAt); 
             const date=(newdate.getFullYear()*31536000000)+(newdate.getMonth()*86400000*30)+(newdate.getDay()*86400000)
             const e= row.expiredate/86400000
@@ -55,9 +57,9 @@ export default function page() {
                 {row.name}
               </TableCell>
               <TableCell className='text-center' align="right">{row.type}</TableCell>
-              <TableCell className='text-center' align="right"><p className='w-56 break-words h-fit text-center '>{row.description}</p></TableCell>
+              <TableCell className='text-center' align="right"><p className='w-56 break-words h-fit text-end '>{row.description}</p></TableCell>
               <TableCell className='text-center' align="right">{row.quantity}</TableCell>
-              <TableCell className='text-center' align="right">{sss}{" "}{Word}</TableCell>
+              <TableCell className='text-center' align="right">{col?"":sss+Word}</TableCell>
             </TableRow>
 )})}
         </TableBody>

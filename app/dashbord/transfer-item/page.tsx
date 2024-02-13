@@ -65,7 +65,7 @@ export default function page(){
           
            </div>
            <div className='w-56 flex flex-col gap-3  '>
-             <label className='capitalize'>restoration date</label>
+             <label className='capitalize'>to</label>
              <input type="text" className='border-2 border-black rounded-lg'
                 onChange={(e)=>setTo(e.target.value)}
              />

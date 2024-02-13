@@ -18,7 +18,8 @@ export default function page(){
   const [description,setDescription]=useState("")
   const [type,setType]=useState("")
   const [quantity,setQuantity]=useState("")
-  const [from,setFrom]=useState("")
+  const [return_day,setReturn]=useState("")
+  const [to,setTo]=useState("")
   const [error,setError]=useState(false)
   const [loading,setLoading]=useState(false)
   const [data,setData]=useState([])
@@ -36,7 +37,8 @@ export default function page(){
       description:description,
       type:type,
       quantity:quantity,
-      from:from
+      to:to,
+      restortion_day:return_day
     }
      try {
     const item=await CreateBorrowedItem(data)
@@ -68,9 +70,9 @@ export default function page(){
           
            </div>
            <div className='w-56 flex flex-col gap-3  '>
-             <label className='capitalize'>From</label>
+             <label className='capitalize'>to</label>
              <input type="text" className='border-2 border-black rounded-lg'
-                onChange={(e)=>setFrom(e.target.value)}
+                onChange={(e)=>setTo(e.target.value)}
              />
            </div>
            <div className='w-56 flex flex-col gap-3 '>
@@ -85,11 +87,17 @@ export default function page(){
                 onChange={(e)=>setQuantity(e.target.value)}
              />
            </div>
+           <div className='w-56 flex flex-col gap-3'>
+             <label className='capitalize'>return day</label>
+             <input type="text" className='border-2 border-black rounded-lg'
+                onChange={(e)=>setReturn(e.target.value)}
+             />
+           </div>
            {error&&(<p className="text-pink-500 text-center">try again</p>)}
            <div className='flex gap-32 mx-10 my-5 cursor-pointer justify-center'>
             <button type="button" 
                onClick={()=>handleSubmit()}
-               disabled={name===""||quantity===""||description===""||type===""||from===""}
+               disabled={name===""||quantity===""||description===""||type===""||to===""||return_day===""}
             className='px-5 py-2 bg-sky-600 rounded-lg hover:scale-110' >{loading?(<p>Loading...</p>):(<p>save</p>)}</button>
            
            </div>
@@ -106,7 +114,7 @@ export default function page(){
       
       <div className='mr-2'>
         <h1  className='capitalize text-2xl font-bold pt-3 text-center text-pink-900 '>borrowed items</h1>
-        <div className='h-[350px] overflow-y-auto flex flex-col gap-3 border-2 border-sky-600 p-4 '>
+        <div className='h-[350px] overflow-y-auto flex flex-col gap-3 border-2 border-sky-600  '>
           <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
@@ -115,7 +123,8 @@ export default function page(){
             <TableCell  className="capitalize text-2xl font-bold  text-center text-pink-900" align="right">type</TableCell>
             <TableCell  className="capitalize text-2xl font-bold  text-center text-pink-900" align="right">description</TableCell>
             <TableCell  className="capitalize text-2xl font-bold  text-center text-pink-900" align="right">quantity</TableCell>
-            <TableCell  className="capitalize text-2xl font-bold  text-center text-pink-900" align="right">from</TableCell>
+            <TableCell  className="capitalize text-2xl font-bold  text-center text-pink-900" align="right">to</TableCell>
+            <TableCell  className="capitalize text-2xl font-bold  text-center text-pink-900" align="right">return day</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -132,6 +141,7 @@ export default function page(){
               <TableCell className='text-center' align="right"><p className='w-40 break-words h-fit '>{row.description}</p></TableCell>
               <TableCell className='text-center' align="right">{row.quantity}</TableCell>
               <TableCell className='text-center' align="right">{row.from}</TableCell>
+              <TableCell className='text-center' align="right">{row.restortion_day}</TableCell>
             </TableRow>
 )})}
         </TableBody>
