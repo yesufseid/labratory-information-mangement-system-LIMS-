@@ -57,7 +57,7 @@ export default function page() {
                 {row.name}
               </TableCell>
               <TableCell className='text-center' align="right">{row.type}</TableCell>
-              <TableCell className='text-center' align="right"><p className='w-56 break-words h-fit text-end '>{row.description}</p></TableCell>
+              <TableCell className='text-center' align="right"><p className='w-56 break-words h-fit text-center '>{row.description}</p></TableCell>
               <TableCell className='text-center' align="right">{row.quantity}</TableCell>
               <TableCell className='text-center' align="right">{col?"":sss+Word}</TableCell>
             </TableRow>
