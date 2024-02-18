@@ -10,22 +10,29 @@ import { Login } from "../components/Login";
 import Link from 'next/link'
 import { GetItems,GetBorrowedItems,GetTransferedItems } from "../lib/actions";
 
+type props={
+   id:string,
+   user_name:string,
+   password:string,
+   roll:number
+}
 
 
 const Dashbord = () => {
  const [expire,setExpire]=useState<number>(0)
+ const [user,setUser]=useState<props>()
 
 
 
 useEffect(()=>{
+  const u=localStorage.getItem("user")
+  const user:props=JSON.parse(u)
+  setUser(user)
   const handleFech=async()=>{
   try {
     const items=await GetItems()
     const Bitems=await GetBorrowedItems()
     const Titems=await GetTransferedItems()
-    // const data=JSON.stringify(items)
-    // const Bdata=JSON.stringify(Bitems)
-    // const Tdata=JSON.stringify(Titems)
     localStorage.setItem("data",items)
     localStorage.setItem("Bdata",Bitems)
     localStorage.setItem("Tdata",Titems)
@@ -45,12 +52,6 @@ useEffect(()=>{
 } 
 handleFech()
  },[])
- const u=localStorage.getItem("user")
- const user=JSON.parse(u)
-console.log(user);
-
- 
-
 
   return (
  <div className="bg-slate-400">
