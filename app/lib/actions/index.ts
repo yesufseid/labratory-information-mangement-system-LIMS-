@@ -3,17 +3,18 @@ import { ConnectToDb } from "../mongoose"
 import  { User,Item, BorrowItem, TransferItem } from "../models"
 
 const GetUser=async(username:string,password:string)=>{
- const data={user_name:"Admin",
-    password:"Admin"}
     try {
         ConnectToDb()
         const user =await User.findOne(
             {user_name:username},
         ) 
      if(user?.password===password){
-             return true
+      console.log(user);
+      
+        const data=JSON.stringify(user)
+             return data
         }else{
-            return false
+            return "false"
         } 
     } catch (error) {
        console.log(error);   

@@ -15,8 +15,9 @@ const handleSubmit=async()=>{
   setDisabled(true)
    try {
       const res=await GetUser(username,password)
-      const data=JSON.stringify({user:true}) 
-      if(res===true){
+      const dat=JSON.parse(res)
+      if(dat.password){
+        const data=JSON.stringify(dat) 
         localStorage.setItem("user",data)
         window.location.href="/"
       }else{

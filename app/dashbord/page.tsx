@@ -11,6 +11,7 @@ import Link from 'next/link'
 import { GetItems,GetBorrowedItems,GetTransferedItems } from "../lib/actions";
 
 
+
 const Dashbord = () => {
  const [expire,setExpire]=useState<number>(0)
 
@@ -44,7 +45,11 @@ useEffect(()=>{
 } 
 handleFech()
  },[])
+ const u=localStorage.getItem("user")
+ const user=JSON.parse(u)
+console.log(user);
 
+ 
 
 
   return (
@@ -83,12 +88,14 @@ handleFech()
           <h1 className='capitalize text-2xl font-bold pt-5 text-center text-slate-500'>borrow item</h1> 
           </Link>
         </div>
+        {user?.roll===1&&
         <div className="border-2 border-black flex flex-col justify-center">
         <Link href={"/dashbord/transfer-item"}>
           < BiTransfer className="w-32 h-32 text-sky-950  mx-auto hover:scale-110 cursor-pointer duration-500" />
           <h1 className='capitalize text-2xl font-bold pt-5 text-center text-slate-500'>transfer item</h1> 
           </Link>
         </div>
+        }
     </div>
     </div>
  </div>

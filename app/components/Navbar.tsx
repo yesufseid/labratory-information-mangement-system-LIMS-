@@ -14,7 +14,7 @@ const Navbar = ({setShow}:props) => {
   useEffect(()=>{
   const user=localStorage.getItem("user")
   const data=JSON.parse(user)
-  if(data?.user===true)  return  setUser(true)
+  if(data)  return  setUser(true)
   },[])
 
 const LogOut=()=>{
